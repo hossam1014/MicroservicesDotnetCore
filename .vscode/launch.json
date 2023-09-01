@@ -45,6 +45,26 @@
       }
     },
     {
+      "name": ".NET Core Launch (Discount Web)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/Services/Discount/Discount.API/bin/Debug/net6.0/Discount.API.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/Services/Discount/Discount.API",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
       "name": "Docker .NET Launch",
       "type": "docker",
       "request": "launch",
