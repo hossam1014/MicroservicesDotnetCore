@@ -12,6 +12,9 @@ services:
   discountdb:
     image: postgres
 
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
   pgadmin:
     image: dpage/pgadmin4
 
@@ -41,6 +44,12 @@ services:
     build:
       context: .
       dockerfile: Services/Discount/Discount.gRPC/Dockerfile
+
+  orderingapi:
+    image: orderingapi
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
 
 
 

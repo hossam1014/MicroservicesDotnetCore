@@ -2,17 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Ordering.Domain.Common;
+using MediatR;
 
-namespace Ordering.Domain.Entities
+namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
 {
-    public class Order: BaseEntity
+    public class UpdateOrderCommand : IRequest
     {
+        public int Id { get; set; }
         public string UserName { get; set; }
-        public double TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
 
-        // BillingAddress // TODO : Single Responsibility class must be implement , we didnt do it in here
-
+        // BillingAddress s
+        
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }

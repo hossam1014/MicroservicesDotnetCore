@@ -29,6 +29,15 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
+  orderdb:
+    container_name: orderdb
+    environment:
+        SA_PASSWORD: "H123456789"
+        ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+        - "1433:1433"
+
 
   pgadmin:
     container_name: pgadmin
@@ -125,5 +134,23 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234;"
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
+
+  orderingapi:
+    container_name: orderingapi
+    image: orderingapi
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
+      args:
+        - configuration=Debug
+    depends_on:
+        - orderdb
+    ports:
+      - 8004:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=H123456789;TrustServerCertificate=True"
     volumes:
       - ~/.vsdbg:/remote_debugger:rw
