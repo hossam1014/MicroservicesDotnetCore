@@ -97,12 +97,14 @@ services:
         - configuration=Debug
     depends_on:
       - basketdb
+      - rabbitmq
     ports:
       - 8001:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "CashSettings:ConnectionString=basketdb:6379"
       - "GrpcSettings:DiscountUrl=http://discountgrpc"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
 
     volumes:
       - ~/.vsdbg:/remote_debugger:rw
@@ -154,10 +156,12 @@ services:
         - configuration=Debug
     depends_on:
         - orderdb
+        - rabbitmq
     ports:
       - 8004:80
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=H123456789;TrustServerCertificate=True"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     volumes:
       - ~/.vsdbg:/remote_debugger:rw
