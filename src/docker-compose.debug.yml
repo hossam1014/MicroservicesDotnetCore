@@ -165,3 +165,24 @@ services:
       - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     volumes:
       - ~/.vsdbg:/remote_debugger:rw
+
+
+  ocelotapigw:
+    container_name: ocelotapigw
+    image: ocelotapigw
+    build:
+      context: .
+      dockerfile: ApiGateways/OcelotApiGw/Dockerfile
+      args:
+        - configuration=Debug
+    depends_on:
+        - catalogapi
+        - basketapi
+        - discountapi
+        - orderingapi
+    ports:
+      - 8010:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
