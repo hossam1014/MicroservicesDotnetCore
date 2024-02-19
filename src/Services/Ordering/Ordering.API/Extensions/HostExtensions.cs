@@ -34,7 +34,7 @@ namespace Ordering.API.Extensions
                 {
                     logger.LogError(ex, "An error occurred while migrating the database used on context {DbContextName}", typeof(TContext).Name);
 
-                    if (retryForAvailability < 50)
+                    if (retryForAvailability < 20)
                     {
                         retryForAvailability++;
                         System.Threading.Thread.Sleep(2000);

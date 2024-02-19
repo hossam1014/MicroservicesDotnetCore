@@ -13,6 +13,6 @@ namespace Shopping.Aggregator.Models
         public string Summary { get; set; }
         public string Description { get; set; }
         public string ImageFile { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
     }
 }

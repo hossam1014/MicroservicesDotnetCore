@@ -13,11 +13,11 @@ namespace Basket.API.Entities
         public List<ShoppingCartItem> Items { get; set; } = new List<ShoppingCartItem>();
 
 
-        public decimal TotalPrice 
+        public double TotalPrice 
         { 
             get 
             {
-                decimal totalPrice = 0;
+                double totalPrice = 0;
                 foreach (var item in Items)
                 {
                     totalPrice += item.Price * item.Quantity;
